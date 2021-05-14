@@ -8,4 +8,8 @@ rename \*\_upload to your liking
 
 ## Start
 
-npm start // default port: 4001
+npm start
+
+## ENV
+
+// default port: 4001
