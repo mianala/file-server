@@ -2,14 +2,23 @@ var express = require("express")
 var multer = require("multer")
 var router = express.Router()
 
-var mef_courriel_upload = multer({
-  dest: process.env.MEF_COURRIEL_UPLOAD_FOLDER,
+var upload_storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    console.log(`${process.env.UPLOAD_FOLDER}/${file.fieldname}`)
+    cb(null, `${process.env.UPLOAD_FOLDER}/${file.fieldname}`)
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9)
+    cb(null, file.fieldname + "-" + uniqueSuffix)
+  },
 })
 
-/* GET home page. */
+var upload = multer({ storage: upload_storage })
+
+/* Post upload. */
 router.post(
   "/upload",
-  mef_courriel_upload.array("files", 10),
+  upload.array("mef-courriel-files", 10),
   function (req, res, next) {}
 )
 
