@@ -4,8 +4,6 @@ Clone
 
 npm install
 
-rename \*\_upload to your liking
-
 ## Start
 
 npm start
@@ -13,3 +11,7 @@ npm start
 ## ENV
 
 // default port: 4001
+
+# MEF COURRIEL
+
+Post to /uploads/mef field name "files"
