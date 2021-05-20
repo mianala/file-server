@@ -1,14 +1,28 @@
 var dotenv = require("dotenv").config()
 var createError = require("http-errors")
+
 var express = require("express")
+var cors = require("cors")
 var path = require("path")
 var cookieParser = require("cookie-parser")
 var logger = require("morgan")
+
+var whitelist = ["http://localhost:4200", "http://127.0.0.1:4200"]
+var corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error("Not allowed by CORS"))
+    }
+  },
+}
 
 var fileRouter = require("./routes/file")
 var indexRouter = require("./routes/index")
 
 var app = express()
+app.use(cors(corsOptions))
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"))
