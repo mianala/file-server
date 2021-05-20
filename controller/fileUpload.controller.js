@@ -7,7 +7,6 @@ const uploadFile = async (req, res) => {
     if (req.files == undefined) {
       return res.status(400).send({ message: "Choose a file to upload" })
     }
-    console.log(req.files)
 
     res.status(200).send({
       files: req.files,
