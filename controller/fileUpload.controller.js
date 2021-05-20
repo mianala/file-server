@@ -4,12 +4,13 @@ const uploadFile = async (req, res) => {
   try {
     await upload.mefFileUploadMiddleware(req, res)
 
-    if (req.file == undefined) {
+    if (req.files == undefined) {
       return res.status(400).send({ message: "Choose a file to upload" })
     }
+    console.log(req.files)
 
     res.status(200).send({
-      message: "File uploaded successfully: " + req.file.originalname,
+      files: req.files,
     })
   } catch (err) {
     console.log(err)

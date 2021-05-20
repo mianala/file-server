@@ -5,20 +5,25 @@ const util = require("util")
 
 var upload_storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    var folder = `${process.env.UPLOAD_FOLDER}/${file.fieldname}`
+    var folder = `${process.env.UPLOAD_FOLDER}${req._parsedUrl.path}/${file.fieldname}`
     if (!fs.existsSync(folder)) {
       fs.mkdirSync(folder, { recursive: true })
     }
-    cb(null, `${process.env.UPLOAD_FOLDER}/${file.fieldname}`)
+    cb(null, folder)
   },
   filename: function (req, file, cb) {
-    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9)
-    cb(null, file.fieldname + "-" + uniqueSuffix)
+    const uniquePreffix = Date.now() + "-" + Math.round(Math.random() * 1e9)
+    cb(null, uniquePreffix + "-" + file.originalname)
   },
 })
 
 // first option
-var mef_upload = multer({ storage: upload_storage }).array("files", 10)
+var mef_upload = multer({
+  storage: upload_storage,
+  // limits: {
+  //   fileSize: 1024 * 1024 * 1280,
+  // },
+}).array("files", 10)
 
 let mefFileUploadMiddleware = util.promisify(mef_upload)
 
