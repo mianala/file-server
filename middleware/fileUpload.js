@@ -18,13 +18,20 @@ var upload_storage = multer.diskStorage({
 })
 
 // first option
-var mef_upload = multer({
+var flowFileUpload = multer({
+  storage: upload_storage,
+  // limits: {
+  //   fileSize: 1024 * 1024 * 1280,
+  // },
+}).array("files", 10)
+// first option
+var flowFileUpload = multer({
   storage: upload_storage,
   // limits: {
   //   fileSize: 1024 * 1024 * 1280,
   // },
 }).array("files", 10)
 
-let mefFileUploadMiddleware = util.promisify(mef_upload)
+let mefFlowFileUploadMiddleware = util.promisify(flowFileUpload)
 
-module.exports = { mefFileUploadMiddleware }
+module.exports = { mefFlowFileUploadMiddleware }
