@@ -1,4 +1,4 @@
-# file-server
+# LOHARANO FILE-SERVER
 
 Clone
 
@@ -12,6 +12,6 @@ npm start
 
 // default port: 4001
 
-# MEF COURRIEL
+## MEF COURRIEL
 
-Post to /uploads/mef field name "files"
+Post to /file/mef field name "files" for mef-flow-files
