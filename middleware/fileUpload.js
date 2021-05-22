@@ -17,14 +17,14 @@ var upload_storage = multer.diskStorage({
   },
 })
 
-// first option
+// mef flow
 var flowFileUpload = multer({
   storage: upload_storage,
 }).array("files", 10)
-// first option
+// profile pic
 var mefProfilePictureUpload = multer({
   storage: upload_storage,
-}).single("profile_images")
+}).single("profile_picture")
 
 let mefFlowFileUploadMiddleware = util.promisify(flowFileUpload)
 let mefProfilePictureUploadMiddleware = util.promisify(mefProfilePictureUpload)
