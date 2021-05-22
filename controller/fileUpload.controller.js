@@ -2,18 +2,10 @@ const upload = require("../middleware/fileUpload")
 
 const uploadFile = async (req, res) => {
   try {
-    if (req.files !== undefined) {
-      await upload.mefFlowFileUploadMiddleware(req, res)
-      res.status(200).send({
-        files: req.files,
-      })
-    }
+    await upload.mefFlowFileUploadMiddleware(req, res)
 
-    if (req.profile_picture !== undefined) {
-      await upload.mefProfilePictureUploadMiddleware(req, res)
-      res.status(200).send({
-        files: req.profile_picture,
-      })
+    if (req.files == undefined) {
+      return res.status(400).send({ message: "Choose a file to upload" })
     }
 
     res.status(200).send({
