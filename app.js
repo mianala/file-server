@@ -36,6 +36,9 @@ app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, "public")))
 app.use(express.static(path.join(__dirname, "uploads")))
+app.use(
+  express.static(path.join(__dirname, "../mef-courriel/dist/mef-courriel"))
+)
 
 app.use("/file", fileRouter)
 app.use("/", indexRouter)
