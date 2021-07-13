@@ -39,6 +39,7 @@ app.use(express.static(path.join(__dirname, "uploads")))
 app.use(
   express.static(path.join(__dirname, "../mef-courriel/dist/mef-courriel"))
 )
+app.use(express.static(path.join(__dirname, "../../excourriel/public/project")))
 
 app.use("/file", fileRouter)
 app.use("/", indexRouter)
